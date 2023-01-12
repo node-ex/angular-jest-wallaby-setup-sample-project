@@ -1,27 +1,34 @@
-# AngularJestWallabySetupSampleProject
+# angular-jest-wallaby-setup-sample-project
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.4.
+This repository serves as a sample project for this PR: [Unable to make Wallaby.js work with Angular CLI + Jest · Issue #3144 · wallabyjs/public](https://github.com/wallabyjs/public/issues/3144)
 
-## Development server
+**Setup**
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+* OS: Linux Mint based on Ubuntu 20.04.5 LTS
+* Editor: Visual Studio Code with Wallaby.js and some other extensions
+* Node.js: version 16.17.0
+* NPM: version 8.15.0
+* Angular CLI: version 15.0.4
 
-## Code scaffolding
+**Steps performed to get it to this state**
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+* `ng new angular-jest-wallaby-setup-sample-project`
+  * Chose no router and plain CSS styling
+* `ng add @briebug/jest-schematic`
+  * Schematic that removes Karma+Jasmine testing setup and adds basic Jest setup
+* Renamed `jest.config.js` to `jest.config.js` and modified as stated in the `jest-preset-angular` README
+  * https://github.com/thymikee/jest-preset-angular#configuration
+  * Created `setup-jest.ts`
+  * Added line to `jest.config.js`: `setupFilesAfterEnv: ['<rootDir>/setup-jest.ts']`
+* Modified `tsconfig.spec.json` as stated in the `jest-preset-angular` README
+  * https://github.com/thymikee/jest-preset-angular#configuration
+  * Added line to `tsconfig.spec.json`: `"module": "CommonJs",`
+* Added some type annotations to `app.component.spec.ts` to check whether Jest setup knowns how to parse TypeScript
+* Created `wallaby.js` config
 
-## Build
+**Result**
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+* `npx jest` works
+* `ng test` works
+* Wallaby.js fails with `Runtime error: Jest encountered an unexpected token​​` error
+  * Looks like Wallaby.js uses different Jest setup that cannot parse TypeScript
