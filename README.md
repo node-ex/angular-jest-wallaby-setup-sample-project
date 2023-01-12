@@ -15,7 +15,7 @@ This repository serves as a sample project for this PR: [Unable to make Wallaby.
 * `ng new angular-jest-wallaby-setup-sample-project`
   * Chose no router and plain CSS styling
 * `ng add @briebug/jest-schematic`
-  * Schematic that removes Karma+Jasmine testing setup and adds basic Jest setup
+  * Schematic that removes Karma+Jasmine testing setup and adds basic Jest setup based on `@angular-builders/jest` and `jest-preset-angular`
 * Renamed `jest.config.js` to `jest.config.js` and modified as stated in the `jest-preset-angular` README
   * https://github.com/thymikee/jest-preset-angular#configuration
   * Created `setup-jest.ts`
