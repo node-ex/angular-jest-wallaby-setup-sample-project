@@ -26,9 +26,10 @@ This repository serves as a sample project for this PR: [Unable to make Wallaby.
 * Added some type annotations to `app.component.spec.ts` to check whether Jest setup knowns how to parse TypeScript
 * Created `wallaby.js` config
 
-**Result**
+**Original results**
 
 * `npx jest` works
 * `ng test` works
 * Wallaby.js fails with `Runtime error: Jest encountered an unexpected token​​` error
   * Looks like Wallaby.js uses different Jest setup that cannot parse TypeScript
+  * **Now fixed** :)
